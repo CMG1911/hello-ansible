@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+   - name: Start an instance
+     amazon.aws.ec2_instance:
+       name: "hello-aws9"
+       instance_type: t2.micro
+       key_name: "clave-lucatic2"
+       security_group: sg-01a5d2ec6fc03cc92
+       image_id: ami-0b752bf1df193a6c4
