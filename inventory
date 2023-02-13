@@ -1,0 +1,2 @@
+[ec2]
+54.229.37.9 ansible_user=ec2-user

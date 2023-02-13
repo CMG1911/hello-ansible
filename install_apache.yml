@@ -1,0 +1,34 @@
+- hosts: ec2
+  tasks:
+  - name: Unable docker
+    ansible.builtin.service:
+     name: docker.service
+     pattern: /usr/bin/docker
+     state: stopped
+    become: true
+
+  - name: Install Apache, Git and UFW
+    yum:
+      name: httpd, git, epel-release
+      state: present
+      update_cache: yes
+    become: true
+
+  - name: Enable Apache
+    service:
+      name: httpd
+      enabled: yes
+    become: true
+
+  - name: Git repo
+    git:
+     repo: https://github.com/CMG1911/hello-2048.git
+     dest: /var/www/html
+    become: true
+
+  - name: Allow all access to tcp port 80
+    ufw:
+     rule: allow
+     port: '80'
+     proto: tcp
+    become: true
